@@ -5,14 +5,16 @@ require 'rubygems'
 require 'rake'
 require 'haml'
 
+# Default task
 task default: :compile
 
+# Task to compile HAML files to HTML
 task :compile do
   FileList.new('./src/*.html.haml').each do |filename|
-    if filename =~ /([^\/]+)\.haml$/
-      File.open($1, 'w') do |f|
-        f.write Haml::Engine.new(File.read(filename)).render
-      end
+    content = File.read(filename) # read the file content once
+    # Create the new HTML file
+    File.open(filename.sub('.haml', ''), 'w') do |f|
+      f.write Haml::Engine.new(content).render
     end
   end
 end
