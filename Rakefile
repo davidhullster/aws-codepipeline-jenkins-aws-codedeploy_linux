@@ -17,7 +17,6 @@ task :compile do
   end
 end
 
-
 task :clean do
   FileUtils.rm_r(Dir.glob("./*.html"), force: true)
 end
